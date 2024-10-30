@@ -49,10 +49,13 @@ class SearchPage extends HookConsumerWidget {
 
     final isFetching = queries.every((s) => s.isLoading);
 
+    // cannot do this bruv, you are using this like a destructor
     useEffect(() {
       controller.text = searchTerm;
 
-      return null;
+      return() {
+        controller.closeView("");
+      };
     }, []);
 
     final resultWidget = HookBuilder(
